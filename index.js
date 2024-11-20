@@ -1,6 +1,5 @@
 import * as Carousel from "./Carousel.js";
 import axios from "axios";
-
 // The breed selection input element.
 const breedSelect = document.getElementById("breedSelect");
 // The information section div element.
@@ -9,11 +8,9 @@ const infoDump = document.getElementById("infoDump");
 const progressBar = document.getElementById("progressBar");
 // The get favourites button element.
 const getFavouritesBtn = document.getElementById("getFavouritesBtn");
-
 // Step 0: Store your API key here for reference and easy access.
 const API_KEY =
-  "live_cx65xFKkO0PU6i6K8fSrleay8tLqgt2PT7tGiIKhQcx8nO9zkIUiW62g1cSuc4HJ";
-
+  "live_Hw5WiJJOiy4n10Ki56PKDBnSn4U6iz0JpVujNn8xWulopoPimc3qSBAXQ3zqIEoU";
 /**
  * 1. Create an async function "initialLoad" that does the following:
  * - Retrieve a list of breeds from the cat API using fetch().
@@ -22,31 +19,23 @@ const API_KEY =
  *  - Each option should display text equal to the name of the breed.
  * This function should execute immediately.
  */
-
-//Async function to get data from URL
 async function initialLoad() {
   const response = await fetch(`https://api.thecatapi.com/v1/breeds`);
   const data = await response.json();
-  // console.log(data);
-  //clone the array and return the cat names
+  //console.log(data);
   const breeds = data.map((item) => {
     return { id: item.id, name: item.name };
   });
-  //loop through the array, for each cat breed add an option and appened it to dropdown list.
-  // console.log(breeds);
+  //console.log(breeds);
   breeds.forEach((breed) => {
     const catDrop = document.createElement("option");
-    // console.log(catDrop);
     catDrop.innerHTML = breed.name;
+    //console.log(catDrop);
     catDrop.setAttribute("value", breed.id);
-    // console.log(catDrop);
     breedSelect.appendChild(catDrop);
   });
 }
 initialLoad();
-
-//Part II
-
 breedSelect.addEventListener("change", (event) => {
   fetch(
     `https://api.thecatapi.com/v1/images/search?limit=100&breed_ids=${event.target.value}&api_key=${API_KEY}`
@@ -58,22 +47,18 @@ breedSelect.addEventListener("change", (event) => {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
-
+      console.log(data[0]);
       Carousel.start();
       Carousel.clear();
       data.forEach((catPic) => {
         const img = Carousel.createCarouselItem(catPic.url);
         Carousel.appendCarousel(img);
       });
-
       /*  for (let key in data[0]) {
         console.log(data[0][key]);
-        
       } */
     });
 });
-
 /* breedSelect.addEventListener("change", async () => {
   let id = breedSelect.value;
   console.log(id);
@@ -83,7 +68,6 @@ breedSelect.addEventListener("change", (event) => {
       headers: { "x-api-key": API_KEY },
     }
   );
-  console.log(response);
 }); */
 /**
  * 2. Create an event handler for breedSelect that does the following:
@@ -99,7 +83,6 @@ breedSelect.addEventListener("change", (event) => {
  * - Each new selection should clear, re-populate, and restart the Carousel.
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
-
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
  */
@@ -118,7 +101,6 @@ breedSelect.addEventListener("change", (event) => {
  * - Add a console.log statement to indicate when requests begin.
  * - As an added challenge, try to do this on your own without referencing the lesson material.
  */
-
 /**
  * 6. Next, we'll create a progress bar to indicate the request is in progress.
  * - The progressBar element has already been created for you.
@@ -134,7 +116,6 @@ breedSelect.addEventListener("change", (event) => {
  *   once or twice per request to this API. This is still a concept worth familiarizing yourself
  *   with for future projects.
  */
-
 /**
  * 7. As a final element of progress indication, add the following to your axios interceptors:
  * - In your request interceptor, set the body element's cursor style to "progress."
@@ -154,7 +135,6 @@ breedSelect.addEventListener("change", (event) => {
 export async function favourite(imgId) {
   // your code here
 }
-
 /**
  * 9. Test your favourite() function by creating a getFavourites() function.
  * - Use Axios to get all of your favourites from the cat API.
@@ -164,7 +144,6 @@ export async function favourite(imgId) {
  *    If that isn't in its own function, maybe it should be so you don't have to
  *    repeat yourself in this section.
  */
-
 /**
  * 10. Test your site, thoroughly!
  * - What happens when you try to load the Malayan breed?

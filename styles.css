@@ -2,11 +2,9 @@ html,
 body {
   height: 100%;
 }
-
 body {
   background-color: lightgray;
 }
-
 .progress-bar-top {
   position: fixed;
   top: 0;
@@ -16,7 +14,6 @@ body {
   background-color: green;
   border-bottom: 1px solid black;
 }
-
 .favourite-button {
   position: absolute;
   top: 10px;
@@ -35,7 +32,6 @@ body {
   top: 7px;
   right: 12px;
 }
-
 .carousel-inner {
   padding: 1em;
 }
